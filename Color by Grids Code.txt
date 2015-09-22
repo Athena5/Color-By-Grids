@@ -1,0 +1,25 @@
+var gridWidth = 5;
+var length = 1200;
+var height = 500;
+var canvas = Raphael(0, 0, length, height);
+var allColors = ["white", "silver", "gray", "black", "maroon", "red", "orange", "yellow", "olive", "lime", "green", "aqua", "teal", "blue", "navy", "purple", "fuchsia"];
+
+for (var i = 0; i < height/gridWidth; i++) {//noprotect
+  for (var j = 0; j < length/gridWidth; j++) {
+    var myRectangle = canvas.rect(j*5, i*5, 5, 5);
+    myRectangle.attr("fill", "white");
+    myRectangle.click(changePiece);
+  }
+}
+
+function updateColor(currentColor) {
+  var newColorIndex = (allColors.indexOf(currentColor) + 1) % allColors.length;
+  var newColor = allColors[newColorIndex];
+  return newColor;
+}
+
+function changePiece() {
+  var currentColor = this.attr("fill");
+  var newColor = updateColor(currentColor);
+  this.attr("fill", newColor);
+}
